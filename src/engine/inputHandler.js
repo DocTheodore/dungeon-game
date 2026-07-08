@@ -1,9 +1,21 @@
-export const keys = {};
+export class InputHandler {
+  constructor() {
+    this.pressed = {};
+    this.clicked = {};
+  }
 
-window.addEventListener("keydown", (e) => {
-  keys[e.key.toLowerCase()] = true;
-});
+  init() {
+    window.addEventListener("keydown", (e) => {
+      this.pressed[e.key.toLowerCase()] = true;
+      this.clicked[e.key.toLowerCase()] = true;
+    });
 
-window.addEventListener("keyup", (e) => {
-  keys[e.key.toLowerCase()] = false;
-});
+    window.addEventListener("keyup", (e) => {
+      this.pressed[e.key.toLowerCase()] = false;
+    });
+  }
+
+  update(dt) {
+    this.clicked = {};
+  }
+}

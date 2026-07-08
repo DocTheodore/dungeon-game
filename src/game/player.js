@@ -1,31 +1,31 @@
 import { Entity } from "../engine/entity";
-import { keys } from "../engine/inputHandler";
 
 export class PlayerEntity extends Entity {
-    constructor(x, y) {
+    constructor(x, y, input) {
         super(x, y);
 
         this.speed = 120;
         this.size = 12;
         this.color = '#06F';
+        this.input = input;
     }
 
-    update(dt) {
-        if(keys['w']) {
+    onUpdate(dt) {
+        if(this.input.pressed['w']) {
             this.y -= this.speed * dt;
         }
-        if(keys['s']) {
+        if(this.input.pressed['s']) {
             this.y += this.speed * dt;
         }
-        if(keys['a']) {
+        if(this.input.pressed['a']) {
             this.x -= this.speed * dt;
         }
-        if(keys['d']) {
+        if(this.input.pressed['d']) {
             this.x += this.speed * dt;
         }
     }
 
-    render(ctx) {
+    onRender(ctx) {
         ctx.fillStyle = this.color;
         ctx.fillRect(
             this.x,

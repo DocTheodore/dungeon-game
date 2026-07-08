@@ -1,12 +1,15 @@
 export class Scene {
-  constructor() {
+  constructor(game) {
+    this.game = game;
     this.entities = [];
-    this.backgroundColor = '#000';
-    this.active = false;
   }
 
   start() {
     this.active = true;
+  }
+
+  end() {
+    this.active = false;
   }
 
   update(dt) {
@@ -16,7 +19,8 @@ export class Scene {
   }
 
   render(ctx) {
-    this.background(ctx);
+    this.entities.sort((en1, en2) => en2.layer - en1.id);
+
     for(const entity of this.entities) {
       entity.render(ctx);
     }
@@ -26,10 +30,7 @@ export class Scene {
     this.entities.push(entity);
   }
 
-  background(ctx) {
-    ctx.fillStyle = this.color;
-    ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+  deleteEntity(entity) {
+    entity.active = false;
   }
-
-
 }
