@@ -1,28 +1,29 @@
 import { Entity } from "../engine/entity";
 
 export class PlayerEntity extends Entity {
-    constructor(x, y, input) {
-        super(x, y);
+    constructor(scene, x, y) {
+        super(scene);
+
+        this.x = x;
+        this.y = y;
 
         this.speed = 120;
         this.size = 12;
         this.color = '#06F';
-        this.input = input;
     }
 
+    // Entity methods =========================
+
     onUpdate(dt) {
-        if(this.input.pressed['w']) {
-            this.y -= this.speed * dt;
-        }
-        if(this.input.pressed['s']) {
-            this.y += this.speed * dt;
-        }
-        if(this.input.pressed['a']) {
-            this.x -= this.speed * dt;
-        }
-        if(this.input.pressed['d']) {
-            this.x += this.speed * dt;
-        }
+        let dx = 0;
+        let dy = 0;
+
+        if(this.game.input.pressed['w']) dy--;
+        if(this.game.input.pressed['s']) dy++;
+        if(this.game.input.pressed['a']) dx--;
+        if(this.game.input.pressed['d']) dx++;
+
+        this.move(dx, dy, dt);
     }
 
     onRender(ctx) {
@@ -33,5 +34,12 @@ export class PlayerEntity extends Entity {
             this.size,
             this.size
         );
+    }
+
+    // Methods ================================
+
+    move(dx, dy, dt) {
+        this.x += dx * this.speed * dt;
+        this.y += dy * this.speed * dt;
     }
 }

@@ -1,5 +1,4 @@
 import { InputHandler } from "./inputHandler";
-import { PlayerEntity } from "../game/player";
 import { Scene } from "./scene";
 
 export class Game {
@@ -11,7 +10,7 @@ export class Game {
 
     this.lastTime = 0;
     this.scene = null;
-    this.inputHandler = new InputHandler();
+    this.input = new InputHandler();
     this.loop = this.loop.bind(this);
   }
 
@@ -19,10 +18,6 @@ export class Game {
     if (this.scene) this.scene.active = false;
     this.scene = scene;
     this.scene.start();
-
-    this.scene.addEntity(
-      new PlayerEntity(10, 10, this.inputHandler)
-    );
   }
 
   start() {
@@ -44,7 +39,10 @@ export class Game {
   }
 
   loop(timestamp) {
-    const dt = (timestamp - this.lastTime) / 1000;
+    const dt = Math.min(
+        (timestamp - this.lastTime) / 1000,
+        0.05
+    );
     this.lastTime = timestamp;
     
     this.clear();
