@@ -1,5 +1,7 @@
+import { Test01 } from "../game/scenes/test01";
 import { InputHandler } from "./inputHandler";
 import { Scene } from "./scene";
+import { SceneManager } from "./sceneManager";
 
 export class Game {
   constructor(canvas) {
@@ -9,15 +11,9 @@ export class Game {
     this.ctx = canvas.getContext("2d");
 
     this.lastTime = 0;
-    this.scene = null;
     this.input = new InputHandler();
+    this.sceneManager = new SceneManager(this);
     this.loop = this.loop.bind(this);
-  }
-
-  setScene(scene) {
-    if (this.scene) this.scene.active = false;
-    this.scene = scene;
-    this.scene.start();
   }
 
   start() {
@@ -28,8 +24,8 @@ export class Game {
       this.canvas.height = window.innerHeight;
     });
 
-    this.inputHandler.init();
-    this.setScene(new Scene());
+    this.input.init();
+    this.sceneManager.change(new Test01(this));
 
     requestAnimationFrame(this.loop);
   }
@@ -47,14 +43,16 @@ export class Game {
     
     this.clear();
     
-    // Update dos sistemas gerais
-    this.inputHandler.update();
-    
     // Update da cena atual
-    if(this.scene?.active) {
-      this.scene?.update(dt);
-      this.scene?.render(this.ctx);
+    const scene = this.sceneManager.current;
+
+    if(scene?.active) {
+      scene.update(dt);
+      scene.render(this.ctx);
     }
+
+    // Update dos sistemas gerais
+    this.input.update();
 
     requestAnimationFrame(this.loop);
   }

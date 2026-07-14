@@ -1,6 +1,6 @@
-import { Entity } from "../engine/entity";
+import { Entity } from "../../engine/entity";
 
-export class PlayerEntity extends Entity {
+export class EnemyEntity extends Entity {
     constructor(scene, x, y) {
         super(scene);
 
@@ -9,7 +9,7 @@ export class PlayerEntity extends Entity {
 
         this.speed = 120;
         this.size = 12;
-        this.color = '#06F';
+        this.color = '#F01';
     }
 
     // Entity methods =========================
@@ -18,10 +18,10 @@ export class PlayerEntity extends Entity {
         let dx = 0;
         let dy = 0;
 
-        if(this.game.input.pressed['w']) dy--;
-        if(this.game.input.pressed['s']) dy++;
-        if(this.game.input.pressed['a']) dx--;
-        if(this.game.input.pressed['d']) dx++;
+        //if(this.game.input.pressed['w']) dy--;
+        //if(this.game.input.pressed['s']) dy++;
+        //if(this.game.input.pressed['a']) dx--;
+        //if(this.game.input.pressed['d']) dx++;
 
         this.move(dx, dy, dt);
     }

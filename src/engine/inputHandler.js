@@ -6,16 +6,34 @@ export class InputHandler {
 
   init() {
     window.addEventListener("keydown", (e) => {
-      this.pressed[e.key.toLowerCase()] = true;
-      this.clicked[e.key.toLowerCase()] = true;
+      const key = e.key.toLowerCase();
+
+      if (!this.pressed[key]) {
+        this.clicked[key] = true;
+      }
+
+      this.pressed[key] = true;
     });
 
     window.addEventListener("keyup", (e) => {
       this.pressed[e.key.toLowerCase()] = false;
     });
+
+    window.addEventListener("blur", (e) => {
+      this.pressed = {};
+      this.clicked = {};
+    });
   }
 
-  update(dt) {
+  update() {
     this.clicked = {};
+  }
+
+  isPressed(key) {
+    return !!this.pressed[key.toLowerCase()];
+  }
+
+  isClicked(key) {
+    return !!this.clicked[key.toLowerCase()];
   }
 }
