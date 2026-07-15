@@ -7,6 +7,7 @@ export class Scene {
   constructor(game) {
     this.game = game;
     this.entities = [];
+    this.tileMap = null;
     this.camera = new Camera(this);
   }
 
@@ -62,6 +63,9 @@ export class Scene {
     ctx.save(); // =====================
     
     this.camera.apply(ctx);
+
+    this.tileMap?.render(ctx);
+
     this.onRenderWorld(ctx);
 
     for(const entity of this.entities) {

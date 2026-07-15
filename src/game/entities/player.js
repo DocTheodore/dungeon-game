@@ -25,15 +25,6 @@ export class PlayerEntity extends Entity {
         if(this.input.isPressed('a')) dx--;
         if(this.input.isPressed('d')) dx++;
 
-        // Teste de camera
-        if(this.input.isClicked('p')) {
-            if(!this.scene.camera.target) {
-                this.scene.camera.follow(this);
-            } else {
-                this.scene.camera.setPosition(0, 0);
-            }
-        }
-
         this.move(dx, dy, dt);
     }
 
