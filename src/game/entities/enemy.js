@@ -18,10 +18,10 @@ export class EnemyEntity extends Entity {
         let dx = 0;
         let dy = 0;
 
-        if(this.game.input.pressed['arrowup']) dy--;
-        if(this.game.input.pressed['arrowdown']) dy++;
-        if(this.game.input.pressed['arrowleft']) dx--;
-        if(this.game.input.pressed['arrowright']) dx++;
+        //if(this.game.input.pressed['arrowup']) dy--;
+        //if(this.game.input.pressed['arrowdown']) dy++;
+        //if(this.game.input.pressed['arrowleft']) dx--;
+        //if(this.game.input.pressed['arrowright']) dx++;
 
         this.move(dx, dy, dt);
     }

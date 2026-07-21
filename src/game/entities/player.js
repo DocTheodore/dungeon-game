@@ -1,14 +1,15 @@
 import { Entity } from "../../engine/entity";
 
 export class PlayerEntity extends Entity {
-    constructor(scene, x, y) {
+    constructor(scene, x, y, size) {
         super(scene);
 
         this.x = x;
         this.y = y;
+        this.width = size;
+        this.height = size;
 
         this.speed = 120;
-        this.size = 12;
         this.color = '#06F';
 
         this.input = this.game.input;
@@ -33,8 +34,8 @@ export class PlayerEntity extends Entity {
         ctx.fillRect(
             this.x,
             this.y,
-            this.size,
-            this.size
+            this.width,
+            this.height
         );
     }
 
