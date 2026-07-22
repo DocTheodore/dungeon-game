@@ -11,8 +11,13 @@ export class Entity extends GameObject {
         this.components = [];
     }
 
+    end() {
+        this.components.length = 0;
+        super.end();
+    }
+
     update(dt) {
-        super(dt);
+        super.update(dt);
 
         for (const component of this.components) {
             component.update(dt);
@@ -20,7 +25,7 @@ export class Entity extends GameObject {
     }
 
     lateUpdate(dt) {
-        super(dt);
+        super.lateUpdate(dt);
 
         for (const component of this.components) {
             component.lateUpdate(dt);
@@ -28,7 +33,7 @@ export class Entity extends GameObject {
     }
 
     render(ctx) {
-        super(ctx);
+        super.render(ctx);
 
         for (const component of this.components) {
             component.render(ctx);

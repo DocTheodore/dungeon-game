@@ -6,5 +6,6 @@ export class System extends GameObject {
 
         this.scene = scene;
         this.game = this.scene.game;
+        this.order = 0;
     }
 } 

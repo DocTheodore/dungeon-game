@@ -3,8 +3,6 @@
 export class GameObject {
     constructor() {
         this.active = false;
-        this.parent = null;
-        this.children = [];
     }
 
     start() {
@@ -39,14 +37,4 @@ export class GameObject {
     onUpdate(dt) {} /* Abstract */
     onLateUpdate(dt) {} /* Abstract */
     onRender(ctx) {} /* Abstract */
-
-    addChild(child) {
-        child.parent = this;
-        this.children.push(child);
-    }
-
-    removeChild(child) {
-        this.children = this.children.filter(c => c !== child); 
-        child.parent = null;
-    }
 }

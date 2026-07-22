@@ -1,4 +1,5 @@
 import { Test01 } from "../game/scenes/test01";
+import { EventManager } from "./eventManager";
 import { InputHandler } from "./inputHandler";
 import { Scene } from "./scene";
 import { SceneManager } from "./sceneManager";
@@ -12,6 +13,7 @@ export class Game {
 
     this.lastTime = 0;
     this.input = new InputHandler();
+    this.event = new EventManager();
     this.sceneManager = new SceneManager(this);
     this.loop = this.loop.bind(this);
   }
